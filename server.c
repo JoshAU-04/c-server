@@ -306,6 +306,7 @@ handle_client(void* arg)
           if (channel) {
             if (channel[0] != '#') {
               send(cli->sockfd, "Channel name must start with #\n", 32, 0);
+              break;
             }
             strncpy(cli->channel, channel, CHANNEL_SIZE);
             char msg[BUF_SIZE];
