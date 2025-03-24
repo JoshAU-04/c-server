@@ -304,6 +304,9 @@ handle_client(void* arg)
         } else if (strcmp(command, "/create_channel") == 0) {
           char* channel = strtok(NULL, " ");
           if (channel) {
+            if (channel[0] != '#') {
+              send(cli->sockfd, "Channel name must start with #\n", 32, 0);
+            }
             strncpy(cli->channel, channel, CHANNEL_SIZE);
             char msg[BUF_SIZE];
             snprintf(
